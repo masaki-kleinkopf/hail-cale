@@ -1,11 +1,12 @@
 
 import './App.css';
 import {useEffect, useState} from "react"
+import Stat from '../Stat/Stat'
 
 function App() {
   const [stat, setStat] = useState({})
   useEffect(() => {
-    fetch("https://statsapi.web.nhl.com/api/v1/people/8480069/stats?stats=statsSingleSeason")
+    fetch("https://statsapi.web.nhl.com/api/v1/teams/21?expand=team.roster")
     .then(response => {
       if (!response.ok) {
         console.log("error")
@@ -14,14 +15,13 @@ function App() {
       }
     })
     .then(data => {
-      setStat(data.stats[0].splits[0].stat)
+      setStat(data.teams[0])
     })
   },[])
 
   return (
     <main>
-      <p>Pts:{stat.points}</p>
-      {console.log(stat)}
+      {stat && <Stat stat={stat} />}
     </main>
   )
 }
