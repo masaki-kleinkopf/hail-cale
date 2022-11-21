@@ -1,12 +1,14 @@
 import Player from '../Player/Player'
 
 const Stat = ({ stat }) => {
-  // let playerComponents = stat.roster.roster.map(player => {
-  //   return <Player player={player} />
-  // })
+  let playerComponents = stat.roster.roster.map(player => {
+    return <Player player={player} key={player.person.id} />
+  })
+
   return (
   <div>
-    {console.log("team",stat.roster.roster)}
+    {console.log(playerComponents)}
+    {playerComponents}
   </div>
 
   )

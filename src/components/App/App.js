@@ -4,7 +4,8 @@ import {useEffect, useState} from "react"
 import Stat from '../Stat/Stat'
 
 function App() {
-  const [stat, setStat] = useState({})
+  const [stat, setStat] = useState(null)
+
   useEffect(() => {
     fetch("https://statsapi.web.nhl.com/api/v1/teams/21?expand=team.roster")
     .then(response => {
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <main>
-      {stat && <Stat stat={stat} />}
+      {stat && <Stat stat={stat} /> }
     </main>
   )
 }
