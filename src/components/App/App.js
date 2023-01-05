@@ -5,12 +5,13 @@ import {useEffect, useState} from "react"
 
 
 function App() {
+  const [teamId, setTeamId] = useState(22)
   const [team, setTeam] = useState(null)
   const [lastGame, setLastGame] = useState(null)
   const [playersWithPoints, setPlayersWithPoints] = useState(null)
 
   useEffect(() => {
-    fetch("https://statsapi.web.nhl.com/api/v1/teams/21/?expand=team.schedule.previous")
+    fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamId}/?expand=team.schedule.previous`)
     .then(response => {
       if (!response.ok) {
         console.log("error")
@@ -20,10 +21,8 @@ function App() {
     })
     .then(data => {
       setTeam(data.teams[0])
-      console.log(data.teams[0])
-      console.log(`https://statsapi.web.nhl.com${data.teams[0].previousGameSchedule.dates[0].games[0].link}`)
     })
-  },[])
+  },[teamId])
 
   useEffect(() => {
     if (team) {
@@ -44,8 +43,7 @@ function App() {
 
   useEffect(() => {
     if (lastGame) {
-      console.log("last game", lastGame.liveData.boxscore.teams.away.players)
-      let playersData = lastGame.liveData.boxscore.teams.away.players
+      let playersData = lastGame.liveData.boxscore.teams.away.team.id === team ? lastGame.liveData.boxscore.teams.away.players : lastGame.liveData.boxscore.teams.home.players
       console.log("players Data",playersData)
       let playerIds = Object.keys(playersData)
       console.log("players Ids",playerIds)
@@ -58,13 +56,17 @@ function App() {
       console.log("latest",playersWithPointsInLatest)
       setPlayersWithPoints(playersWithPointsInLatest)
     }
-  },[lastGame])
+  },[lastGame,team])
 
   
 
 
   return (
     <main>
+      <select onChange={(event) => setTeamId(event.target.value)}>
+        <option value="21">Colorado Avalanche</option>
+        <option value="22">Edmonton Oilers</option>
+      </select>
       <h1>NHL POINTS STREAK TRACKER</h1>
       {playersWithPoints && <Player players={playersWithPoints} />}
     </main>
