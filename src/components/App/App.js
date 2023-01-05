@@ -1,6 +1,7 @@
 
 import './App.css';
 import Player from '../Players/Players'
+import Select from '../Select/Select'
 import {useEffect, useState} from "react"
 
 
@@ -63,10 +64,7 @@ function App() {
 
   return (
     <main>
-      <select onChange={(event) => setTeamId(event.target.value)}>
-        <option value="21">Colorado Avalanche</option>
-        <option value="22">Edmonton Oilers</option>
-      </select>
+      <Select setTeamId={setTeamId} />
       <h1>NHL POINTS STREAK TRACKER</h1>
       {playersWithPoints && <Player players={playersWithPoints} />}
     </main>
