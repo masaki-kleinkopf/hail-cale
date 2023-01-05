@@ -15,7 +15,7 @@ function App() {
     fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamId}/?expand=team.schedule.previous`)
     .then(response => {
       if (!response.ok) {
-        console.log("error")
+
       } else {
         return response.json()
       }
@@ -30,13 +30,11 @@ function App() {
       fetch(`https://statsapi.web.nhl.com${team.previousGameSchedule.dates[0].games[0].link}`)
     .then(response => {
       if (!response.ok) {
-        console.log("error")
       } else {
         return response.json()
       }
     })
     .then(data => {
-      console.log(data)
       setLastGame(data)
     })
     }
@@ -44,20 +42,26 @@ function App() {
 
   useEffect(() => {
     if (lastGame) {
-      let playersData = lastGame.liveData.boxscore.teams.away.team.id === team ? lastGame.liveData.boxscore.teams.away.players : lastGame.liveData.boxscore.teams.home.players
-      console.log("players Data",playersData)
+      console.log(lastGame.liveData.boxscore.teams.away.team.id === teamId)
+      // let playersData;
+      // if (lastGame.liveData.boxscore.teams.away.team.id === teamId) {
+      //   playersData = lastGame.liveData.boxscore.teams.away.players
+      // } else {
+      //   playersData = lastGame.liveData.boxscore.teams.home.players
+      // }
+      let playersData = lastGame.liveData.boxscore.teams.away.team.id === teamId ? lastGame.liveData.boxscore.teams.away.players : lastGame.liveData.boxscore.teams.home.players
+      console.log("playersData",playersData)
       let playerIds = Object.keys(playersData)
-      console.log("players Ids",playerIds)
+      
       let playersWithPointsInLatest = playerIds.filter(playerId => playersData[playerId].position.code !== "G" && Object.keys(playersData[playerId].stats).length !== 0).filter(playerId => {
-        console.log("playername", playersData[playerId].person.fullName)
+
         return (playersData[playerId].stats.skaterStats.goals > 0 || playersData[playerId].stats.skaterStats.assists > 0)
       }).map(playerId => {
         return playersData[playerId]
       })
-      console.log("latest",playersWithPointsInLatest)
       setPlayersWithPoints(playersWithPointsInLatest)
     }
-  },[lastGame,team])
+  },[lastGame,teamId])
 
   
 
