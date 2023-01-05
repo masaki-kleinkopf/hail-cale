@@ -6,7 +6,7 @@ import {useEffect, useState} from "react"
 
 
 function App() {
-  const [teamId, setTeamId] = useState(22)
+  const [teamId, setTeamId] = useState()
   const [team, setTeam] = useState(null)
   const [lastGame, setLastGame] = useState(null)
   const [playersWithPoints, setPlayersWithPoints] = useState(null)
@@ -42,15 +42,7 @@ function App() {
 
   useEffect(() => {
     if (lastGame) {
-      console.log(lastGame.liveData.boxscore.teams.away.team.id === teamId)
-      // let playersData;
-      // if (lastGame.liveData.boxscore.teams.away.team.id === teamId) {
-      //   playersData = lastGame.liveData.boxscore.teams.away.players
-      // } else {
-      //   playersData = lastGame.liveData.boxscore.teams.home.players
-      // }
       let playersData = lastGame.liveData.boxscore.teams.away.team.id === teamId ? lastGame.liveData.boxscore.teams.away.players : lastGame.liveData.boxscore.teams.home.players
-      console.log("playersData",playersData)
       let playerIds = Object.keys(playersData)
       
       let playersWithPointsInLatest = playerIds.filter(playerId => playersData[playerId].position.code !== "G" && Object.keys(playersData[playerId].stats).length !== 0).filter(playerId => {
