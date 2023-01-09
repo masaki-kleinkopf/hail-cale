@@ -45,7 +45,6 @@ function App() {
     if (lastGame) {
       let playersData = lastGame.liveData.boxscore.teams.away.team.id === teamId ? lastGame.liveData.boxscore.teams.away.players : lastGame.liveData.boxscore.teams.home.players
       let playerIds = Object.keys(playersData)
-      
       let playersWithPointsInLatest = playerIds.filter(playerId => playersData[playerId].position.code !== "G" && Object.keys(playersData[playerId].stats).length !== 0 && (playersData[playerId].stats.skaterStats.goals > 0 || playersData[playerId].stats.skaterStats.assists > 0)).map(playerId => {
         return playersData[playerId]
       })

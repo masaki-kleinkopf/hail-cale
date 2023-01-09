@@ -1,6 +1,8 @@
+import styles from "./Select.module.scss"
+
 const Select = ({setTeamId}) => {
   return (
-       <select onChange={(event) => setTeamId(parseInt(event.target.value))}>
+       <select className={styles.select} onChange={(event) => setTeamId(parseInt(event.target.value))}>
         <option value ="1">New Jersey Devils</option>
         <option value ="2">New York Islanders</option>
         <option value ="3">New York Rangers</option>
