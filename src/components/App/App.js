@@ -1,5 +1,6 @@
 
-import './App.css';
+import './Globals.css';
+import styles from './App.module.scss'
 import Player from '../Players/Players'
 import Select from '../Select/Select'
 import {useEffect, useState} from "react"
@@ -9,7 +10,7 @@ function App() {
   const [teamId, setTeamId] = useState()
   const [team, setTeam] = useState(null)
   const [lastGame, setLastGame] = useState(null)
-  const [playersWithPoints, setPlayersWithPoints] = useState(null)
+  const [playersWithPoints, setPlayersWithPoints] = useState([])
 
   useEffect(() => {
     fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamId}/?expand=team.schedule.previous`)
@@ -56,10 +57,10 @@ function App() {
 
 
   return (
-    <main>
-      <Select setTeamId={setTeamId} />
+    <main className={styles.main}>
       <h1>NHL POINTS STREAK TRACKER</h1>
-      {playersWithPoints && <Player players={playersWithPoints} />}
+      <Select setTeamId={setTeamId} />
+      {playersWithPoints.length > 0 ?  <Player players={playersWithPoints} /> : <p>No streaks</p>}
     </main>
   )
 }
