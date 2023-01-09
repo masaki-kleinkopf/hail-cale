@@ -3,6 +3,7 @@ import styles from "./Select.module.scss"
 const Select = ({setTeamId}) => {
   return (
        <select className={styles.select} onChange={(event) => setTeamId(parseInt(event.target.value))}>
+        <option disabled selected value> -- select an option -- </option>
         <option value ="1">New Jersey Devils</option>
         <option value ="2">New York Islanders</option>
         <option value ="3">New York Rangers</option>
