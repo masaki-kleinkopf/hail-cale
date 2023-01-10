@@ -56,24 +56,15 @@ function App() {
       }
     })
     .then(data => {
-      setLastGame(data)
-    })
-    }
-  },[team])
-
-  useEffect(() => {
-    if (lastGame) {
-      let playersData = lastGame.liveData.boxscore.teams.away.team.id === teamId ? lastGame.liveData.boxscore.teams.away.players : lastGame.liveData.boxscore.teams.home.players
+      let playersData = data.liveData.boxscore.teams.away.team.id === teamId ? data.liveData.boxscore.teams.away.players : data.liveData.boxscore.teams.home.players
       let playerIds = Object.keys(playersData)
       let playersWithPointsInLatest = playerIds.filter(playerId => playersData[playerId].position.code !== "G" && Object.keys(playersData[playerId].stats).length !== 0 && (playersData[playerId].stats.skaterStats.goals > 0 || playersData[playerId].stats.skaterStats.assists > 0)).map(playerId => {
         return playersData[playerId]
       })
       setPlayersWithPoints(playersWithPointsInLatest)
+    })
     }
-  },[lastGame,teamId])
-
-  
-
+  },[team,teamId])
 
   return (
     <main className={styles.main}>
@@ -83,7 +74,7 @@ function App() {
         {playersWithPoints.length > 0 ?  <Player players={playersWithPoints} /> : <p>No streaks</p>}
       </Route>
       <Route exact path="/allStreaks">
-        <AllStreaks />
+        <AllStreaks allTeams={allTeams}/>
       </Route>
     </main>
   )
