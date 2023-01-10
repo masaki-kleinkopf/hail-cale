@@ -4,13 +4,33 @@ import styles from './App.module.scss'
 import Player from '../Players/Players'
 import Select from '../Select/Select'
 import {useEffect, useState} from "react"
+import { Route } from "react-router-dom";
+import AllStreaks from "../AllStreaks/AllStreaks"
 
 
 function App() {
-  const [teamId, setTeamId] = useState()
+  const [teamId, setTeamId] = useState(null)
+  const [allTeams, setAllTeams] =useState([])
   const [team, setTeam] = useState(null)
   const [lastGame, setLastGame] = useState(null)
   const [playersWithPoints, setPlayersWithPoints] = useState([])
+
+  useEffect(() => {
+    fetch(`https://statsapi.web.nhl.com/api/v1/teams/`)
+    .then(response => {
+      if (!response.ok) {
+
+      } else {
+        return response.json()
+      }
+    })
+    .then(data => {
+      let teamsData = data.teams.map(teamData => {
+        return {id:teamData.id, name:teamData.name}
+      })
+      setAllTeams(teamsData)
+    })
+  },[])
 
   useEffect(() => {
     fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamId}/?expand=team.schedule.previous`)
@@ -58,8 +78,13 @@ function App() {
   return (
     <main className={styles.main}>
       <h1>NHL POINTS STREAK TRACKER</h1>
-      <Select setTeamId={setTeamId} />
-      {playersWithPoints.length > 0 ?  <Player players={playersWithPoints} /> : <p>No streaks</p>}
+      <Route exact path="/">
+        <Select setTeamId={setTeamId} allTeams={allTeams} />
+        {playersWithPoints.length > 0 ?  <Player players={playersWithPoints} /> : <p>No streaks</p>}
+      </Route>
+      <Route exact path="/allStreaks">
+        <AllStreaks />
+      </Route>
     </main>
   )
 }
