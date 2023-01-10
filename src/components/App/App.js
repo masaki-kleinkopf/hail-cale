@@ -12,7 +12,6 @@ function App() {
   const [teamId, setTeamId] = useState(null)
   const [allTeams, setAllTeams] =useState([])
   const [team, setTeam] = useState(null)
-  const [lastGame, setLastGame] = useState(null)
   const [playersWithPoints, setPlayersWithPoints] = useState([])
 
   useEffect(() => {
