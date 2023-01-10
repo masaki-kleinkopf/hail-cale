@@ -26,7 +26,8 @@ const Players = ({ players }) => {
           })
           let combinedData = playerWithStreak.map((streak,index) => {
             return {streak:streak, playerData:players[index]}
-          }).sort((a,b) => b.streak-a.streak)
+          }).sort((a,b) => b.streak.streak-a.streak.streak)
+          console.log("SORTED??", combinedData)
           setPlayersWithStreak(combinedData)
         })
     },[players])
@@ -40,7 +41,7 @@ const Players = ({ players }) => {
       }
     return (
         <div>
-            {playersWithStreak && playerComponents()}
+            {playersWithStreak ? playerComponents() : <p>LOADING...</p>}
         </div>
     )
 
