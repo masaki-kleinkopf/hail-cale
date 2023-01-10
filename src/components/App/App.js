@@ -74,8 +74,8 @@ function App() {
       <Link to="/allStreaks">
         <button>Streak leaderboard</button>
       </Link>
-      <Select setTeamId={setTeamId} allTeams={allTeams} />
       <Route exact path="/">
+        <Select setTeamId={setTeamId} allTeams={allTeams} />
         {playersWithPoints.length > 0 ?  <Player players={playersWithPoints} /> : <p>No streaks</p>}
       </Route>
       <Route exact path="/allStreaks">
