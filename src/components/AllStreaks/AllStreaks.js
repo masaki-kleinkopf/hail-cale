@@ -49,7 +49,10 @@ const AllStreaks = ({allTeams}) => {
     // filter for duplicates by id property
     let filteredAllPlayers = allPlayers.filter((data, index, self) => {
       return index === self.findIndex(player => player.person.id === data.person.id)
+    }).map(data => {
+      return {id: data.person.id, name:data.person.fullName}
     })
+    console.log("FILTEREDPLAYERS", filteredAllPlayers)
     setAllPlayersWithPoints(filteredAllPlayers)
     })}
    },[lastGameLinks])

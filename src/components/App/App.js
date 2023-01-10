@@ -4,7 +4,7 @@ import styles from './App.module.scss'
 import Player from '../Players/Players'
 import Select from '../Select/Select'
 import {useEffect, useState} from "react"
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import AllStreaks from "../AllStreaks/AllStreaks"
 
 
@@ -59,7 +59,10 @@ function App() {
       let playerIds = Object.keys(playersData)
       let playersWithPointsInLatest = playerIds.filter(playerId => playersData[playerId].position.code !== "G" && Object.keys(playersData[playerId].stats).length !== 0 && (playersData[playerId].stats.skaterStats.goals > 0 || playersData[playerId].stats.skaterStats.assists > 0)).map(playerId => {
         return playersData[playerId]
+      }).map(data =>  {
+        return {id: data.person.id, name:data.person.fullName}
       })
+      console.log("playerswithpoints", playersWithPointsInLatest)
       setPlayersWithPoints(playersWithPointsInLatest)
     })
     }
@@ -68,8 +71,11 @@ function App() {
   return (
     <main className={styles.main}>
       <h1>NHL POINTS STREAK TRACKER</h1>
+      <Link to="/allStreaks">
+        <button>Streak leaderboard</button>
+      </Link>
+      <Select setTeamId={setTeamId} allTeams={allTeams} />
       <Route exact path="/">
-        <Select setTeamId={setTeamId} allTeams={allTeams} />
         {playersWithPoints.length > 0 ?  <Player players={playersWithPoints} /> : <p>No streaks</p>}
       </Route>
       <Route exact path="/allStreaks">

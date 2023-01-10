@@ -5,7 +5,7 @@ const Player = ({ player, streak }) => {
         <div>
             {streak > 0 && 
             <div>
-                <p>{player.person.fullName}</p>
+                <p>{player.name}</p>
                 <p>{streak}</p>
             </div> }
         </div>
