@@ -1,7 +1,7 @@
 
 import './Globals.css';
 import styles from './App.module.scss'
-import Player from '../Players/Players'
+import Players from '../Players/Players'
 import Select from '../Select/Select'
 import {useEffect, useState} from "react"
 import { Route, Link } from "react-router-dom";
@@ -71,12 +71,12 @@ function App() {
   return (
     <main className={styles.main}>
       <h1>NHL POINTS STREAK TRACKER</h1>
-      <Link to="/allStreaks">
+      <Link to="/allStreaks" onClick={()=>setTeamId(null)}>
         <button>Streak leaderboard</button>
       </Link>
+      <Select setTeamId={setTeamId} teamId={teamId} allTeams={allTeams} />
       <Route exact path="/">
-        <Select setTeamId={setTeamId} allTeams={allTeams} />
-        {playersWithPoints.length > 0 ?  <Player players={playersWithPoints} /> : <p>No streaks</p>}
+        {playersWithPoints.length > 0 ?  <Players players={playersWithPoints} /> : <p>No streaks</p>}
       </Route>
       <Route exact path="/allStreaks">
         <AllStreaks allTeams={allTeams}/>

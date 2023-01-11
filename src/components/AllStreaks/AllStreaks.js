@@ -58,7 +58,7 @@ const AllStreaks = ({allTeams}) => {
    },[lastGameLinks])
    return (
       <div> 
-        <Players players={AllPlayersWithPoints}/>
+        <Players allStreaks={true} players={AllPlayersWithPoints}/>
       </div>
   )
    }
