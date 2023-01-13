@@ -18,8 +18,9 @@ const Players = ({ players }) => {
         .then(data => {
           let playerWithStreak = data.map(skaterData => {
             let gameSplits = skaterData.stats[0].splits;
+            console.log("GAME SPLots", gameSplits)
             let counter = 0;
-             while (gameSplits[counter].stat.goals > 0 || gameSplits[counter].stat.assists > 0){
+             while (gameSplits[counter] && (gameSplits[counter].stat.goals > 0 || gameSplits[counter].stat.assists > 0)){
                 counter++;
              }
              return {streak:counter}
@@ -31,7 +32,7 @@ const Players = ({ players }) => {
           setPlayersWithStreak(combinedData)
         })
     },[players])
-    
+
       let playerComponents = playersWithStreak.map(player => {
           return <Player player={player.playerData} streak={player.streak}/>
     })
