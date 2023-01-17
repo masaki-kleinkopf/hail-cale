@@ -12,7 +12,7 @@ const Select = ({setTeamId, allTeams,teamId}) => {
   }
   return (
         <select className={styles.select} value={ teamId ? teamId : "disabled"} onChange={handleChange}>
-        <option value="disabled" disabled> -- select an option -- </option>
+        <option value="disabled" disabled> -- select a team -- </option>
         {allTeamsOptions}
       </select>
   )

@@ -7,3 +7,25 @@
     font-size: 32px;
   }
 }
+
+.options{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  a {
+    margin-top:1.6em;
+  }
+  p {
+    margin-left:1em;
+    margin-right: .7em;
+    font-size: 1.5em;
+  }
+}
+
+.selected {
+  button {
+    color: lightsteelblue;
+  }
+}
+

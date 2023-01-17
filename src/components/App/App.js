@@ -4,7 +4,7 @@ import styles from './App.module.scss'
 import Players from '../Players/Players'
 import Select from '../Select/Select'
 import {useEffect, useState} from "react"
-import { Route, Link } from "react-router-dom";
+import { Route, Link, NavLink } from "react-router-dom";
 import AllStreaks from "../AllStreaks/AllStreaks"
 
 
@@ -71,10 +71,13 @@ function App() {
   return (
     <main className={styles.main}>
       <h1>NHL POINTS STREAK TRACKER</h1>
-      <Link to="/allStreaks" onClick={()=>setTeamId(null)}>
-        <button>Streak leaderboard</button>
-      </Link>
-      <Select setTeamId={setTeamId} teamId={teamId} allTeams={allTeams} />
+      <div className={styles.options}>
+        <Select setTeamId={setTeamId} teamId={teamId} allTeams={allTeams} />
+        <p>or</p>
+        <NavLink to="/allStreaks" onClick={()=>setTeamId(null)} activeClassName={styles.selected}>
+          <button>All Streak Leaderboard</button>
+        </NavLink>
+      </div>
       <Route exact path="/">
         {playersWithPoints.length > 0 ?  <Players players={playersWithPoints} /> : <p>No streaks</p>}
       </Route>
