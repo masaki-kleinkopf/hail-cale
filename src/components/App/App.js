@@ -79,7 +79,7 @@ function App() {
         </NavLink>
       </div>
       <Route exact path="/">
-        {playersWithPoints.length > 0 ?  <Players players={playersWithPoints} /> : <p>No streaks</p>}
+        {playersWithPoints.length > 0 ?  <Players allStreaks={false} players={playersWithPoints} /> : <p>No streaks</p>}
       </Route>
       <Route exact path="/allStreaks">
         <AllStreaks allTeams={allTeams}/>

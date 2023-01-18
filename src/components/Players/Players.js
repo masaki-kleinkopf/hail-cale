@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import Player from "../Player/Player"
 
-const Players = ({ players }) => {
-    console.log("PLAYERS", players)
+const Players = ({ players, allStreaks }) => {
     const [playersWithStreak, setPlayersWithStreak] = useState([])
     useEffect(() => {
         Promise.all(players.map(player => {
@@ -36,6 +35,8 @@ const Players = ({ players }) => {
       let playerComponents = playersWithStreak.map(player => {
           return <Player player={player.playerData} streak={player.streak}/>
     })
+
+      playerComponents.length = allStreaks ? playerComponents.length = Math.min(25, playerComponents.length) : playerComponents.length
       
     return (
         <div>
