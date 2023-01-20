@@ -31,12 +31,11 @@ const Players = ({ players, allStreaks }) => {
           setPlayersWithStreak(combinedData)
         })
     },[players])
-
-      let playerComponents = playersWithStreak.map(player => {
+      //filter for players who have 3 game streaks or more
+      let playerComponents = playersWithStreak.filter(player => player.streak > 2).map(player => {
           return <Player player={player.playerData} streak={player.streak}/>
-    })
+      })
 
-      playerComponents.length = allStreaks ? playerComponents.length = Math.min(25, playerComponents.length) : playerComponents.length
       
     return (
         <div>
