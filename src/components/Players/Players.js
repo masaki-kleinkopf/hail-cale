@@ -32,10 +32,15 @@ const Players = ({ players, allStreaks }) => {
         })
     },[players])
       //filter for players who have 3 game streaks or more
-      let playerComponents = playersWithStreak.filter(player => player.streak > 2).map(player => {
+      let teamPlayerComponents = playersWithStreak.map(player => {
           return <Player player={player.playerData} streak={player.streak}/>
       })
 
+      let allStreaksPlayerComponents = playersWithStreak.filter(player => player.streak > 2).map(player => {
+          return <Player player={player.playerData} streak={player.streak}/>
+      })
+
+      let playerComponents = allStreaks ? allStreaksPlayerComponents : teamPlayerComponents
       
     return (
         <div>
