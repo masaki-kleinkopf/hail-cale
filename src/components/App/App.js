@@ -26,7 +26,7 @@ function App() {
     .then(data => {
       let teamsData = data.teams.map(teamData => {
         return {id:teamData.id, name:teamData.name}
-      })
+      }).sort((a,b) => a.name.localeCompare(b.name))
       setAllTeams(teamsData)
     })
   },[])
