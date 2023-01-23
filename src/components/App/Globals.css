@@ -14,3 +14,14 @@ button {
 button:hover {
   color:lightsteelblue;
 }
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color:black;
+}
+
+
+a:hover {
+  color:cornflowerblue
+}

@@ -79,6 +79,7 @@ function App() {
           <button>All Streak Leaderboard</button>
         </NavLink>
       </div>
+      <h5>click player name to see all stats on nhl.com</h5>
       <Route exact path="/">
         {playersWithPoints.length > 0 ?  <Players allStreaks={false} players={playersWithPoints} /> : <p>No streaks</p>}
       </Route>
