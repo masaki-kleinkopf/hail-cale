@@ -26,8 +26,7 @@ const AllStreaks = ({allTeams}) => {
    useEffect(() => {
     if (lastGameLinks.length > 0) {
       Promise.all(lastGameLinks.map(link => {
-        console.log("link", link)
-    return fetch(`https://statsapi.web.nhl.com${link}`)
+      return fetch(`https://statsapi.web.nhl.com${link}`)
       .then(response => {
       if (!response.ok) {
       } else {
@@ -36,12 +35,12 @@ const AllStreaks = ({allTeams}) => {
       })
     }))
     .then(data => {
-      console.log("DATA",data)
       let playersPointsData = data.map(data => {
-        let playersData = {...data.liveData.boxscore.teams.away.players,...data.liveData.boxscore.teams.home.players}
-        let playerIds = Object.keys(playersData)
-        let playersWithPointsInLatest = playerIds.filter(playerId => playersData[playerId].position.code !== "G" && Object.keys(playersData[playerId].stats).length !== 0 && (playersData[playerId].stats.skaterStats.goals > 0 || playersData[playerId].stats.skaterStats.assists > 0)).map(playerId => {
-          return playersData[playerId]
+      let playersData = {...data.liveData.boxscore.teams.away.players,...data.liveData.boxscore.teams.home.players}
+      console.log("PD",playersData)
+      let playerIds = Object.keys(playersData)
+      let playersWithPointsInLatest = playerIds.filter(playerId => playersData[playerId].position.code !== "G" && Object.keys(playersData[playerId].stats).length !== 0 && (playersData[playerId].stats.skaterStats.goals > 0 || playersData[playerId].stats.skaterStats.assists > 0)).map(playerId => {
+        return playersData[playerId]
       })
       return playersWithPointsInLatest
     })
@@ -52,7 +51,6 @@ const AllStreaks = ({allTeams}) => {
     }).map(data => {
       return {id: data.person.id, name:data.person.fullName}
     })
-    console.log("FILTEREDPLAYERS", filteredAllPlayers)
     setAllPlayersWithPoints(filteredAllPlayers)
     })}
    },[lastGameLinks])

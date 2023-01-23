@@ -5,7 +5,7 @@ const Player = ({ player, streak }) => {
         <div>
             {streak > 0 && 
             <div>
-                <p>{player.name}</p>
+                <a href={`https://www.nhl.com/player/${player.id}`} target="_blank" rel="noreferrer" >{player.name}</a>
                 <p>{streak}</p>
             </div> }
         </div>

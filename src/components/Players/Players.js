@@ -17,7 +17,6 @@ const Players = ({ players, allStreaks }) => {
         .then(data => {
           let playerWithStreak = data.map(skaterData => {
             let gameSplits = skaterData.stats[0].splits;
-            console.log("GAME SPLots", gameSplits)
             let counter = 0;
              while (gameSplits[counter] && (gameSplits[counter].stat.goals > 0 || gameSplits[counter].stat.assists > 0)){
                 counter++;
@@ -27,6 +26,7 @@ const Players = ({ players, allStreaks }) => {
           let combinedData = playerWithStreak.map((streak,index) => {
             return {streak:streak.streak, playerData:players[index]}
           }).sort((a,b) => b.streak-a.streak)
+          console.log("players", players)
           console.log("SORTED??", combinedData)
           setPlayersWithStreak(combinedData)
         })
