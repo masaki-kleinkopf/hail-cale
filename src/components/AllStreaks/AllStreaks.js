@@ -37,7 +37,6 @@ const AllStreaks = ({allTeams}) => {
     .then(data => {
       let playersPointsData = data.map(data => {
       let playersData = {...data.liveData.boxscore.teams.away.players,...data.liveData.boxscore.teams.home.players}
-      console.log("PD",playersData)
       let playerIds = Object.keys(playersData)
       let playersWithPointsInLatest = playerIds.filter(playerId => playersData[playerId].position.code !== "G" && Object.keys(playersData[playerId].stats).length !== 0 && (playersData[playerId].stats.skaterStats.goals > 0 || playersData[playerId].stats.skaterStats.assists > 0)).map(playerId => {
         return playersData[playerId]

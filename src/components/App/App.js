@@ -57,13 +57,11 @@ function App() {
     .then(data => {
       let playersData = data.liveData.boxscore.teams.away.team.id === teamId ? data.liveData.boxscore.teams.away.players : data.liveData.boxscore.teams.home.players
       let playerIds = Object.keys(playersData)
-      console.log("PLAYERS DATA", playersData)
       let playersWithPointsInLatest = playerIds.filter(playerId => playersData[playerId].position.code !== "G" && Object.keys(playersData[playerId].stats).length !== 0 && (playersData[playerId].stats.skaterStats.goals > 0 || playersData[playerId].stats.skaterStats.assists > 0)).map(playerId => {
         return playersData[playerId]
       }).map(data =>  {
         return {id: data.person.id, name:data.person.fullName}
       })
-      console.log("playerswithpoints", playersWithPointsInLatest)
       setPlayersWithPoints(playersWithPointsInLatest)
     })
     }

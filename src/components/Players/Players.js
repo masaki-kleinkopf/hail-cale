@@ -26,8 +26,6 @@ const Players = ({ players, allStreaks }) => {
           let combinedData = playerWithStreak.map((streak,index) => {
             return {streak:streak.streak, playerData:players[index]}
           }).sort((a,b) => b.streak-a.streak)
-          console.log("players", players)
-          console.log("SORTED??", combinedData)
           setPlayersWithStreak(combinedData)
         })
     },[players])
