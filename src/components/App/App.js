@@ -71,10 +71,10 @@ function App() {
                   playersData[playerId].stats.skaterStats.assists > 0)
             )
             .map((playerId) => {
-              return playersData[playerId];
-            })
-            .map((data) => {
-              return { id: data.person.id, name: data.person.fullName };
+              return {
+                id: playersData[playerId].person.id,
+                name: playersData[playerId].person.fullName,
+              };
             });
           setPlayersWithPoints(playersWithPointsInLatest);
         });
