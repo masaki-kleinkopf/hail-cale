@@ -3,7 +3,7 @@ import styles from "./App.module.scss";
 import Players from "../Players/Players";
 import Select from "../Select/Select";
 import { useEffect, useState } from "react";
-import { Route, Link, NavLink } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 import AllStreaks from "../AllStreaks/AllStreaks";
 
 function App() {
