@@ -11,7 +11,7 @@ function App() {
   const [allTeams, setAllTeams] = useState([]);
   const [team, setTeam] = useState(null);
   const [playersWithPoints, setPlayersWithPoints] = useState([]);
-
+  //get all teams
   useEffect(() => {
     fetch(`https://statsapi.web.nhl.com/api/v1/teams/`)
       .then((response) => {
@@ -29,7 +29,7 @@ function App() {
         setAllTeams(teamsData);
       });
   }, []);
-
+  //get last game for selected team
   useEffect(() => {
     fetch(
       `https://statsapi.web.nhl.com/api/v1/teams/${teamId}/?expand=team.schedule.previous`
@@ -44,7 +44,7 @@ function App() {
         setTeam(data.teams[0]);
       });
   }, [teamId]);
-
+  //get all data for last game for selected team, and players with points
   useEffect(() => {
     if (team) {
       fetch(
